@@ -122,6 +122,21 @@ bool bitset_inplace_union(bitset_t * restrict b1, const bitset_t * restrict b2) 
   return true;
 }
 
+bitset_t *bitset_union(const bitset_t * restrict b1, const bitset_t * restrict b2) {
+  bitset_t * copy;
+  bool first = b1->arraysize > b2->arraysize;
+  if (first) {
+    copy = bitset_copy(b1);
+    if(copy)
+      bitset_inplace_union(copy, b2);
+  } else {
+    copy = bitset_copy(b2);
+    if(copy)
+      bitset_inplace_union(copy, b1);
+  }
+  return copy;
+}
+
 size_t bitset_minimum(const bitset_t *bitset) {
   for(size_t k = 0; k < bitset->arraysize; k++) {
     uint64_t w = bitset->array[k];

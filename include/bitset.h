@@ -101,6 +101,9 @@ size_t bitset_maximum(const bitset_t *bitset);
 /* compute the union in-place (to b1), returns true if successful, to generate a new bitset first call bitset_copy */
 bool bitset_inplace_union(bitset_t * restrict b1, const bitset_t * restrict b2);
 
+/* compute the union in a copy. */
+bitset_t * bitset_union(const bitset_t * restrict b1, const bitset_t * restrict b2);
+
 /* report the size of the union (without materializing it) */
 size_t bitset_union_count(const bitset_t * restrict b1, const bitset_t * restrict b2);
 
